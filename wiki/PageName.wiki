@@ -1,4 +1,5 @@
 #summary Java API for the Ham Radio Deluxe V5 TCP/IP interface
+#labels Featured
 
 = Introduction =
 
@@ -14,5 +15,5 @@ Thanks to Simon Brown for his assistance.
 = Details =
 
 
-The initial (incomplete) documentation can be found at: 
+The initial (incomplete) documentation of the TCP/IP protocol can be found at: 
  http://www.ham-radio-deluxe.com/Support/Interfaces/HRD50TCPIPInterface.aspx

@@ -1,0 +1,39 @@
+#summary One-sentence summary of this page.
+#labels Featured,Phase-Implementation
+
+= Introduction =
+
+An example of status returned from HRD for a Yaesu FT-897.
+
+
+= Details =
+
+{{{
+   RadioStatus props=radio.getStatus();
+        NavigableMap<String, String>sss
+                =new ConcurrentSkipListMap<String, String>();
+              //  (props.entrySet());
+
+      
+        for (Map.Entry ent:props.entrySet()){
+            String key = (String)ent.getKey();
+            String val = (String)ent.getValue();
+            sss.put(key,val);
+        }
+
+        String expected = "{Daemon=yes, Freq=145230000, PLtone=unknown, RadioName=FT-897, Served_radios=1:FT-897, " +
+                "Server=Ham Radio Deluxe, Server_version=v5.0 b2494, agc=state unknown, alc=state unknown, " +
+                "autom=state unknown, a~/~b=state unknown, bk=state unknown, clarifier=state unknown, " +
+                "clientThread=HRD Client, ctcss=state unknown, dbf=state unknown, dnf=state unknown, " +
+                "dnr=state unknown, dsp=state unknown, dw=state unknown, fast=state unknown, keyer=state unknown, " +
+                "lock=yes, mod=state unknown, mode=FM, mph=state unknown, nb=state unknown, pri=state unknown, " +
+                "proc=state unknown, pwr=state unknown, radio_Options1=[swr, mph, dw, pwr, dbf, dsp, bk, agc, autom, " +
+                "slow, dnf, vox, proc, alc, mod, keyer, lock, dnr, a~/~b, tx, pri, nb, scan, split, ctcss, fast], " +
+                "radio_Options2={tone=[dcs~on, dcs~decoder~on, dcs~encoder~on, , ctcss~on, ctcss~decoder~on, " +
+                "ctcss~encoder~on, , tone~off], repeater=['-'~shift, '+'~shift, simplex], clarifier=[on, off], " +
+                "mode=[lsb, usb, cw, cw-r, am, wfm, fm, dig, pkt, fm(n)]}, repeater=positive, scan=state unknown, " +
+                "slow=state unknown, split=state unknown, swr=state unknown, tone=state unknown, tx=state unknown, " +
+                "vox=state unknown}";
+        String result=sss.toString();
+        assertEquals(expected,result);
+}}}

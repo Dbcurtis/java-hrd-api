@@ -22,7 +22,8 @@ import java.util.regex.Pattern;
  *
  * @author Daniel B. Curtis N6WN
  *
- * Code based on <a href="http://www.ham-radio-deluxe.com/Support/Interfaces/HRD50TCPIPInterface.aspx"> Ham Radio Deluxe TCP/IP</a> and conversations
+ * Code based on <a href="http://www.ham-radio-deluxe.com/Support/Interfaces/HRD50TCPIPInterface.aspx">
+ * Ham Radio Deluxe TCP/IP</a> and conversations
  * with Simon Brown.
  *
  *

@@ -101,13 +101,13 @@ public class RadioHRD extends AbstractVirtualRadio {
 
     //   private final Map<String, String> context2FreqMap=new HashMap<String, String>();
 
-    private String doCmd(final CtxCommand cmd) {
+    private final String doCmd(final CtxCommand cmd) {
         final RspHandler handler=new RspHandler();
         cmd.send(handler);
         return handler.waitForResponse();
     }
 
-    private String doCmd(final Command cmd) {
+    private final String doCmd(final Command cmd) {
         final RspHandler handler=new RspHandler();
         cmd.send(handler);
         return handler.waitForResponse();

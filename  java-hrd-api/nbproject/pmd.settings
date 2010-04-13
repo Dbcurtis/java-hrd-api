@@ -1,0 +1,11 @@
+AvoidFinalLocalVariable
+SystemPrintln
+DoNotUseThreads
+DefaultPackage
+AvoidUsingVolatile
+LongVariable
+CyclomaticComplexity
+AvoidInstantiatingObjectsInLoops
+UseLocaleWithCaseConversions
+BeanMembersShouldSerialize
+OnlyOneReturn

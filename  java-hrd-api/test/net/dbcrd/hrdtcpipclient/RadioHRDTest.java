@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 public class RadioHRDTest {
 
     static Thread clientthread=null;
-    static RadioHRD radio;
+    static RadioControl radio;
 
     @BeforeClass
     public static void setUpClass() {
@@ -117,7 +117,7 @@ public class RadioHRDTest {
     @Test
     public void testPttPush() {
         System.out.println("pttPush and release");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         long currentfreq=instance.getFreq();
         instance.setFreq(CALL_FREQ);
         instance.setRepeaterOffset(0);
@@ -142,7 +142,7 @@ public class RadioHRDTest {
     @Test
     public void testPttRelease() {
         System.out.println("pttRelease");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         boolean expResult=true;
         boolean result=instance.pttRelease();
         assertEquals(expResult, result);
@@ -157,7 +157,7 @@ public class RadioHRDTest {
     @Test
     public void testSetGetFreq() {
         System.out.println("setFreq and getFreq");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         long initialFreq=radio.getFreq();
         instance.setFreq(INIT_FREQ);
         long currentFreq=instance.getFreq();
@@ -175,7 +175,7 @@ public class RadioHRDTest {
     @Test
     public void testSetGetMode() {
         System.out.println("setMode and getMode");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         long initialFreq=instance.getFreq();
         Mode initialMode=instance.getMode();
         instance.setMode(Mode.AM);
@@ -203,7 +203,7 @@ public class RadioHRDTest {
     @Test
     public void testGetRadioID() {
         System.out.println("getRadioID");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         String expResult="FT-897 (HRD)";
         String result=instance.getRadioID();
         assertEquals(expResult, result);
@@ -217,7 +217,7 @@ public class RadioHRDTest {
     @Ignore
     public void testGetStatus() {
         System.out.println("getStatus");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         RadioStatus expResult=null;
         RadioStatus result=instance.getStatus();
         assertEquals(expResult, result);
@@ -231,7 +231,7 @@ public class RadioHRDTest {
     @Test
     public void testIsThisRadio() {
         System.out.println("isThisRadio");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         boolean expResult=true;
         boolean result=instance.isThisRadioControlled();
         assertEquals(expResult, result);
@@ -245,7 +245,7 @@ public class RadioHRDTest {
     public void testSetPlTone() {
         System.out.println("setPlTone");
         String pltone="";
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         boolean expResult=true;
         boolean result=instance.setPlTone(pltone);
         assertEquals(expResult, result);
@@ -261,7 +261,7 @@ public class RadioHRDTest {
     @Test
     public void testSetandIsLock() {
         System.out.println("setLock and isLock");
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         boolean initialLock=instance.isLock();
         boolean result=instance.setLock(true);
         assertEquals(true, result);
@@ -280,7 +280,7 @@ public class RadioHRDTest {
     public void testSetRepeaterOffset() {
         System.out.println("setRepeaterOffset");
 
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         boolean expResult=true;
         boolean result=instance.setRepeaterOffset(0);
         assertEquals(expResult, result);
@@ -297,7 +297,7 @@ public class RadioHRDTest {
     public void testgetRadioID() {
         System.out.println("getRadioID");
 
-        RadioHRD instance=radio;
+        RadioControl instance=radio;
         String expResult="FT-897 (HRD)";
         String result = instance.getRadioID();
         assertEquals(expResult,result);

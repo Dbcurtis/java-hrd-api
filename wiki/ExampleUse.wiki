@@ -1,0 +1,44 @@
+#summary A code example to set the frequency, mode, and perform a PTT push and release.
+#labels Featured,Phase-Deploy
+
+= Introduction =
+
+An example of how to use the API.
+
+
+= Details =
+
+{{{
+  final static long CALL_FREQ=146520000; 
+  RadioControl radio=new RadioHRD("localhost", 7809); //get the radio control for HRD
+  if(!radio.isThisRadioControlled()){
+     fail("Hrd not connected");
+  }
+        long currentfreq=radio.getFreq(); // get current frequency
+        Mode initialMode=radio.getMode();
+        radio.setMode(Mode.FM);
+        radio.setFreq(CALL_FREQ); // change to new frequency
+        radio.setRepeaterOffset(0);    // set simplex 
+        radio.pttPush(); // hit the ptt
+ 
+// talk
+
+        radio.pttRelease(); // release the ptt
+        radio.setFreq(currentfreq) // reset the freq.
+        radio.setMode(initialMode); // and the mode
+        AbstractRadio.abortClientThread=true; // end the communication thread
+        if(null!=clientthread){
+            clientthread.interrupt();
+            while(true){
+                if(Thread.State.TERMINATED.equals(clientthread.getState())){
+                    break;
+                }
+            }
+        }
+
+
+}}}
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages

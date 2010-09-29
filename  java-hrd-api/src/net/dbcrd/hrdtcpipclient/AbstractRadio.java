@@ -18,7 +18,7 @@ import java.util.Properties;
  *
  *
  */
-public abstract class AbstractRadio implements RadioControl {
+ abstract class AbstractRadio implements RadioControl {
 
 
     /** key for obtaining the portname from the commProps */

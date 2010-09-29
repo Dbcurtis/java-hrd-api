@@ -21,7 +21,7 @@ import java.net.InetAddress;
  *
  *
  */
-public abstract class AbstractVirtualRadio extends AbstractRadio {
+ abstract class AbstractVirtualRadio extends AbstractRadio {
 
 
     InetAddress inetAddress=null;

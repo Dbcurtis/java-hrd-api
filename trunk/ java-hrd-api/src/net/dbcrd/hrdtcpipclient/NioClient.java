@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * see: <link> http://rox-xmlrpc.sourceforge.net/niotut/</link>
  * some modificaitons by Dan Curtis to use generics
  */
-public class NioClient implements Runnable {
+ class NioClient implements Runnable {
     private static final Logger THE_LOGGER=Logger.getLogger(NioClient.class.getName());
     // The host:port combination to connect to
     final private InetAddress hostAddress;
@@ -45,7 +45,7 @@ public class NioClient implements Runnable {
      * @param port an int that specifies the port on the host.
      * @throws IOException
      */
-    public NioClient(final InetAddress hostAddress, final int port) throws IOException {
+     NioClient(final InetAddress hostAddress, final int port) throws IOException {
         this.hostAddress=hostAddress;
         this.port=port;
         this.selector=this.initSelector();
@@ -121,7 +121,7 @@ public class NioClient implements Runnable {
      * @param handler a RspHandler to receive response from the server
      * @throws IOException
      */
-    public void send(final byte[] data, final RspHandler handler) throws IOException {
+     void send(final byte[] data, final RspHandler handler) throws IOException {
         // Start a new connection
         final SocketChannel socket=this.initiateConnection();
 

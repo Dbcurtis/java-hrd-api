@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * based on <link>http://rox-xmlrpc.sourceforge.net/niotut/</link>
  */
-public class RspHandler {
+ class RspHandler {
 
     static final int BYTE_MASK=0xFF;
     static final long TEN_SEC=10000L;
@@ -38,7 +38,7 @@ public class RspHandler {
      * @param rsp a byte[] that is the received data.
      * @return a boolean true
      */
-    public synchronized boolean handleResponse(final byte[] rsp) {
+     synchronized boolean handleResponse(final byte[] rsp) {
         this.rsp=rsp.clone();
         this.notify();
         return true;
@@ -50,7 +50,7 @@ public class RspHandler {
      * @return a String containing the response to the prior command or
      *  "error" if the wait timed out (>4 sec) or was interrupted.
      */
-    public synchronized String waitForResponse() {
+     synchronized String waitForResponse() {
         while(this.rsp==null){
             try{
                 final long starttime = System.currentTimeMillis();

@@ -20,16 +20,13 @@ import java.util.logging.Logger;
  *
  * based on <link>http://rox-xmlrpc.sourceforge.net/niotut/</link>
  */
- class RspHandler {
+class RspHandler {
 
     static final int BYTE_MASK=0xFF;
     static final long TEN_SEC=10000L;
-     static final long FIVE_SEC=5000L;
+    static final long FIVE_SEC=5000L;
     static final String ERROR="error";
-
-    private static final Logger THE_LOGGER=Logger.getLogger(
-            RspHandler.class.getName());
-
+    private static final Logger THE_LOGGER=Logger.getLogger(RspHandler.class.getName());
     private byte[] rsp=null;
     private int length;
 
@@ -38,52 +35,51 @@ import java.util.logging.Logger;
      * @param rsp a byte[] that is the received data.
      * @return a boolean true
      */
-     synchronized boolean handleResponse(final byte[] rsp) {
+    synchronized boolean handleResponse(final byte[] rsp) {
         this.rsp=rsp.clone();
         this.notify();
         return true;
     }
-
 
     /**
      * Receives data from the server, validates the packet format, and extracts and trims the packet payload.
      * @return a String containing the response to the prior command or
      *  "error" if the wait timed out (>4 sec) or was interrupted.
      */
-     synchronized String waitForResponse() {
-        while(this.rsp==null){
-            try{
-                final long starttime = System.currentTimeMillis();
+    synchronized String waitForResponse() {
+        while (this.rsp == null) {
+            try {
+                final long starttime=System.currentTimeMillis();
                 this.wait(FIVE_SEC);
-                final long waittime = System.currentTimeMillis()-starttime;
-                if (waittime > 4000){
+                final long waittime=System.currentTimeMillis() - starttime;
+                if (waittime > 4000) {
                     THE_LOGGER.warning("Response delayed > 4 secs");
                     return ERROR;
                 }
-            } catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 return ERROR;
             }
         }
 
-        if(rsp.length==(BYTE_MASK&rsp[0])){
-            length=BYTE_MASK&rsp[0];
-        } else{
-            if(rsp.length>3){
+        if (rsp.length == (BYTE_MASK & rsp[0])) {
+            length=BYTE_MASK & rsp[0];
+        } else {
+            if (rsp.length > 3) {
                 length=0;
-                length+=BYTE_MASK&rsp[0];
-                length+=(BYTE_MASK&rsp[1])<<8;
-                length+=(BYTE_MASK&rsp[2])<<16;
-                length+=(BYTE_MASK&rsp[3])<<24;
-                if(rsp.length!=length){
+                length+=BYTE_MASK & rsp[0];
+                length+=(BYTE_MASK & rsp[1]) << 8;
+                length+=(BYTE_MASK & rsp[2]) << 16;
+                length+=(BYTE_MASK & rsp[3]) << 24;
+                if (rsp.length != length) {
                     THE_LOGGER.severe("partial packet 1******************");
                     return ERROR;
                 }
-            } else{
+            } else {
                 THE_LOGGER.severe("partial packet 2******************");
                 return ERROR;
             }
         }
-        if(validatePacket()){
+        if (validatePacket()) {
             return (extractData());
         }
         THE_LOGGER.severe("Invalid packet *****************");
@@ -96,16 +92,16 @@ import java.util.logging.Logger;
      */
     private boolean validatePacket() {
         boolean result=true;
-        result=result&&rsp[4]==(byte) 0xcd;
-        result=result&&rsp[5]==(byte) 0xab;
-        result=result&&rsp[6]==(byte) 0x34;
-        result=result&&rsp[7]==(byte) 0x12;
-        result=result&&rsp[8]==(byte) 0x34;
-        result=result&&rsp[9]==(byte) 0x12;
-        result=result&&rsp[10]==(byte) 0xcd;
-        result=result&&rsp[11]==(byte) 0xab;
-        for(int i=length-1; i>length-7; i--){
-            result=result&&rsp[i]==0;
+        result=result && rsp[4] == (byte) 0xcd;
+        result=result && rsp[5] == (byte) 0xab;
+        result=result && rsp[6] == (byte) 0x34;
+        result=result && rsp[7] == (byte) 0x12;
+        result=result && rsp[8] == (byte) 0x34;
+        result=result && rsp[9] == (byte) 0x12;
+        result=result && rsp[10] == (byte) 0xcd;
+        result=result && rsp[11] == (byte) 0xab;
+        for (int i=length - 1; i > length - 7; i--) {
+            result=result && rsp[i] == 0;
         }
         return result;
     }
@@ -115,11 +111,11 @@ import java.util.logging.Logger;
      * @return a String containing the szText as a Java String (trimed)
      */
     private String extractData() {
-        final byte[] result=new byte[length-22];
-        System.arraycopy(rsp, 16, result, 0, length-22);
+        final byte[] result=new byte[length - 22];
+        System.arraycopy(rsp, 16, result, 0, length - 22);
         final StringBuilder sbTemp=new StringBuilder();
         int idx=0;
-        for(int i=0; i<(result.length>>1); i++){
+        for (int i=0; i < (result.length >> 1); i++) {
             final char mychar=(char) result[idx++];
             idx++;
             sbTemp.append(mychar);

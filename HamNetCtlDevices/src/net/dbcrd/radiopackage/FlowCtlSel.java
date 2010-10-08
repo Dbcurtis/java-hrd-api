@@ -1,7 +1,7 @@
 package net.dbcrd.radiopackage;
 
 /**
- *
+ * Flow control options
  * @author dbcurtis
  */
 public enum FlowCtlSel {
